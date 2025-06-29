@@ -144,22 +144,24 @@
        </div>
       
     </div>
-    <script>
-  fetch('index.html')
+   <script>
+  fetch('navbar.html')
     .then(response => response.text())
     .then(data => {
       document.getElementById('navbar').innerHTML = data;
 
-      // Highlight the active page
-      const currentPage = window.location.pathname.split('/').pop();
+      const currentPath = window.location.pathname;
       const links = document.querySelectorAll('#navlinks a');
+
       links.forEach(link => {
-        if (link.getAttribute('href') === currentPage) {
+        const linkPath = new URL(link.href).pathname;
+        if (currentPath === linkPath || currentPath === '/' && linkPath.endsWith('index.html')) {
           link.classList.add('active');
         }
       });
     });
 </script>
+
        <script>
         function Addtable(changes) {
             const section = document.getElementById("Addchanges");

@@ -251,21 +251,23 @@
    
         </script>
  <script>
-  fetch('index.html')
+  fetch('navbar.html')
     .then(response => response.text())
     .then(data => {
       document.getElementById('navbar').innerHTML = data;
 
-      // Highlight the active page
-      const currentPage = window.location.pathname.split('/').pop();
+      const currentPath = window.location.pathname;
       const links = document.querySelectorAll('#navlinks a');
+
       links.forEach(link => {
-        if (link.getAttribute('href') === currentPage) {
+        const linkPath = new URL(link.href).pathname;
+        if (currentPath === linkPath || currentPath === '/' && linkPath.endsWith('index.html')) {
           link.classList.add('active');
         }
       });
     });
-</script>  
+</script>
+ 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
 </body>
